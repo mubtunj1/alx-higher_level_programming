@@ -1,68 +1,156 @@
 #!/usr/bin/python3
-"""This module contains a square class"""
-
+"""0x0C. Python - Almost a circle, task 10 - 14"""
 from models.rectangle import Rectangle
+from models.base import Base
 
 
 class Square(Rectangle):
-    """Represents a square"""
+    """Creates square objects with 2 dimensions and offset coordinates.
+
+    Uses super-superclass `Base` __init__ to create valid instance id,
+    and passes args to superclass `__init__` to set attributes. Does not
+    create its own attributes. `size` acts as alias for `width`/`height`.
+
+    Args:
+        size (int): x and y dimensions of square
+        x (int): horizontal offset of square
+        y (int): vertical offset of square
+        id (int): unique identifer for each instance of super().super()
+
+    Project task:
+        10. And now, the Square! - class Square `__init__`, `__str__`,
+            only inherited validation, no new attributes
+
+    """
     def __init__(self, size, x=0, y=0, id=None):
-        self.size = size
-        self.x = x
-        self.y = y
-        self.id = None
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Defines a format for the string representation of the class"""
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
+        """Returns string with numeric representation of square
+
+        Returns:
+            '[Square] (<id>) <x>/<y> - <size>'
+
+        Project task:
+            10. And now, the Square! - class Square `__init__`, `__str__`,
+                only inherited validation, no new attributes
+        """
+        return ('[Square] ({:d}) {:d}/'.format(self.id, self.x) +
+                '{:d} - {:d}'.format(self.y, self.width))
 
     @property
     def size(self):
-        """Gets the value of size"""
-        return self.__width
+        """`size` getter, but in this case `size` acts as alias for
+        `width`/`height`.
+
+        Returns:
+            __size (int): x and y dimensions of square
+
+        Project task:
+            11. Square size - public getter and setter `size`, using
+                validation from super().width
+
+        """
+        return self.width
 
     @size.setter
     def size(self, value):
-        """Sets the value for size"""
-        if type(value) is not int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = value
-        self.__height = value
+        """`size` setter, but in this case `size` acts as alias for
+        `width`/`height`.
+
+        Args:
+            value (int): x and y dimensions of square
+
+        Project task:
+            11. Square size - public getter and setter `size`, using
+                validation from super().width
+
+        """
+        self.width = value
+        self.height = value
 
     def update(self, *args, **kwargs):
-        """Updates attributes of an instance"""
+        """Updates superclass attributes in a given order based on variable
+        amount of non-keyword args, or in any order with keyword args.
 
-        if args is not None and len(args) != 0:
-            if len(args) >= 1:
-                if type(args[0]) != int and args[0] is not None:
-                    raise TypeError("id must be an integer")
-                self.id = args[0]
-            if len(args) > 1:
-                self.size = args[1]
-            if len(args) > 2:
-                self.x = args[2]
-            if len(args) > 3:
-                self.y = args[3]
+        `*args` takes precedence over `**kwargs`: if any non-keyword args are
+        present, keyword args are ignored.
+
+        Args (non-keyword, in order of appearance in variable list):
+            id (int): unique identifer for each instance of super()
+            size (int): x and y dimensions of square
+            x (int): horizontal offset of rectangle
+            y (int): vertical offset of rectangle
+
+        Keyword args:
+            any of the above if key matches arg name
+
+        Raises:
+            TypeError: if amount of consecutive non-keyword or keyword
+                arguments given not between 1 and 4 (not in task instructions)
+            KeyError: if keyword not among superclass and super-superclass
+                getters
+
+        Project tasks:
+            12. Square update - updates `id`, `size`, `x`, or `y` based on
+                *args, or uses **kwargs to access key-worded argments in
+                any order. if *args not empty, **kwargs skipped
+
+        """
+        if len(args) == 0:
+            if len(kwargs) == 0 or len(kwargs) > 4:
+                raise TypeError('Square.update() takes 1 to 4 keyword,' +
+                                ' or 1 to 4 non-keyword arguments')
+            else:
+                for key, value in kwargs.items():
+                    if key == 'id':
+                        if self.id != value:
+                            temp = self.id
+                            self.id = value
+                            Base._Base__assigned_ids.remove(temp)
+                            Base._Base__assigned_ids.add(value)
+                    elif key == 'size':
+                        self.size = value
+                    elif key == 'x':
+                        self.x = value
+                    elif key == 'y':
+                        self.y = value
+                    else:
+                        raise KeyError('invalid attribute name: ' +
+                                       '{}'.format(key))
+        elif len(args) > 4:
+            raise TypeError('Square.update() takes 1 to 4 keyword,' +
+                            ' or 1 to 4 non-keyword arguments')
         else:
-            for key, value in kwargs.items():
-                if key == "id":
-                    if type(value) != int and value is not None:
-                        raise TypeError("id must be an integer")
-                    self.id = value
-                if key == "size":
-                    self.size = value
-                if key == "x":
-                    self.x = value
-                if key == "y":
-                    self.y = value
+            for i, arg in enumerate(args):
+                if i == 0:
+                    if self.id != arg:
+                        temp = self.id
+                        self.id = arg
+                        Base._Base__assigned_ids.remove(temp)
+                        Base._Base__assigned_ids.add(arg)
+                elif i == 1:
+                    self.size = arg
+                elif i == 2:
+                    self.x = arg
+                elif i == 3:
+                    self.y = arg
 
     def to_dictionary(self):
-        """Returns the dictionary representation of a Square"""
+        """Creates dictionary representation of self without revealing private
+        attribute names, as would __dict__.
 
-        obj_dictionary = {'id': self.id, 'size': self.size, 'x': self.x,
-                          'y': self.y}
+        Returns:
+            self_dict (dict): custom dictionary of private attribute values
+                populated using getters
 
-        return obj_dictionary
+        Project tasks:
+            14. Square instance to dictionary representation
+
+        """
+        self_dict = dict()
+        self_dict['id'] = self.id
+        self_dict['size'] = self.size
+        self_dict['x'] = self.x
+        self_dict['y'] = self.y
+        return self_dict
