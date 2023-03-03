@@ -4,10 +4,10 @@ Foundations > Higher-level programming > Python
 ---
 
 ### Project author
-Guillaume Salva
+Mubtunj
 
 ### Assignment dates
-06-05-2020 to 06-10-2020
+FEB 9 2023
 
 ### Description
 In preparation for the AirBnB clone project cycle, a review of all Python concepts covered so far: importing, exceptions, classes, private attributes, getter/setters, class/static methods, inheritance, unit testing, file I/O, and JSON serialization. In addition, `args` and `kwargs` are introduced.
