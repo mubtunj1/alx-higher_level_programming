@@ -2,10 +2,11 @@
 /**
  * Represents rectangle with width and height
  */
-class rectangle {
+class Rectangle {
   constructor (w, h) {
     this.width = w;
     this.height = h;
   }
-}
-module.exports = rectangle;
+};
+module.exports = Rectangle;
+
