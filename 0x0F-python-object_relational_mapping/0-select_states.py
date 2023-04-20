@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 
-#!/usr/bin/python3
 """
 A script that lists all states from the database hbtn_0e_0_usa
 """
+
 import MySQLdb
 from sys import argv
 
@@ -15,4 +16,4 @@ if __name__ == "__main__":
         print(row)
     db_cursor.close()
     db_connect.close()
-    
+ 
