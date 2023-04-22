@@ -17,3 +17,4 @@ if __name__ == "__main__":
         print(row)
     db_cursor.close()
     db_connect.close()
+

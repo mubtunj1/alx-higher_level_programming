@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """a script that lists all states with a name starting
 with N (upper N) from the database hbtn_0e_0_usa"""
 import MySQLdb
@@ -15,3 +15,4 @@ if __name__ == "__main__":
         print(row)
     db_cursor.close()
     db_connect.close()
+
