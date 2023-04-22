@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """
-improve the files model_city.py and model_state.py, and save them as relationship_city.py and relationship_state.py:
+improve the files model_city.py and model_state.py, and
+save them as relationship_city.py and relationship_state.py:
 """
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
+
 
 class state(Base):
     __tablename__ = 'states'

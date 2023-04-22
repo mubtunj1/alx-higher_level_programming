@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Write a script that lists all State objects, and
-corresponding City objects, contained in the database hbtn_0e_101_usa
+Write a script that lists all City objects from the database hbtn_0e_101_usa
 """
 from relationship_state import Base, State
 from relationship_city import City
@@ -18,7 +17,6 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    for state, city in session.query(State, City)
-    .filter(State.id == City.state_id).order_by(State.id, City.id):
-        print("{}: {} -> {}".format(city.id, city.name, state.name))
+    for city in session.query(City).order_by(City.id):
+        print("{}: {} -> {}".format(city.id, city.name, city.state.name))
     session.close()
