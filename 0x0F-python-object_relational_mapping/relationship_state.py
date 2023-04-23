@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
-class state(Base):
+class State(Base):
     __tablename__ = 'states'
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
