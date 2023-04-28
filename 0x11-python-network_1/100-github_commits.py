@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Lists the 10 most recent commits on a given GitHub repository.
-Usage: ./100-github_commits.py <repository name> <repository owner>
+"""
+The Holberton School staff evaluates candidates applying for a
+back-end position with multiple technical challenges, like this one
 """
 import sys
 import requests
