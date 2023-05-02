@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Write a Python script that takes in a URL, sends 
+Write a Python script that takes in a URL, send
 a request to the URL and displays the body of the response.
 """
 import sys
